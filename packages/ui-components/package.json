@@ -1,0 +1,11 @@
+{
+  "name": "@goalconnect/ui-components",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "build": "node -e \"console.log('ui-components build placeholder')\"",
+    "dev": "node -e \"console.log('ui-components dev placeholder')\"",
+    "lint": "node -e \"console.log('ui-components lint placeholder')\""
+  }
+}

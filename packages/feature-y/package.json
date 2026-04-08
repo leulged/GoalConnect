@@ -1,0 +1,15 @@
+{
+  "name": "@goalconnect/feature-y",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.js",
+  "dependencies": {
+    "@goalconnect/ui-components": "^0.1.0",
+    "@goalconnect/utils": "^0.1.0"
+  },
+  "scripts": {
+    "build": "node -e \"console.log('feature-y build placeholder')\"",
+    "dev": "node src/index.js",
+    "lint": "node -e \"console.log('feature-y lint placeholder')\""
+  }
+}
