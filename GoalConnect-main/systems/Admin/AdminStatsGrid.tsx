@@ -17,6 +17,7 @@ export function AdminStatsGrid({ stats }: AdminStatsGridProps) {
       transition={{ duration: 0.5 }}
       className="grid gap-4 md:grid-cols-2 lg:grid-cols-4"
     >
+      
       <StatCard
         title="Total Academies"
         value={stats?.academies.total || 0}
