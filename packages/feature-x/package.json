@@ -2,14 +2,23 @@
   "name": "@goalconnect/feature-x",
   "version": "0.1.0",
   "private": true,
-  "main": "src/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
   "dependencies": {
     "@goalconnect/ui-components": "^0.1.0",
-    "@goalconnect/utils": "^0.1.0"
+    "@goalconnect/utils": "^0.1.0",
+    "react": "^19.2.5"
   },
   "scripts": {
-    "build": "node -e \"console.log('feature-x build placeholder')\"",
-    "dev": "node src/index.js",
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
     "lint": "node -e \"console.log('feature-x lint placeholder')\""
   }
 }
