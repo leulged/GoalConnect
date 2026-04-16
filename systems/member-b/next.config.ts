@@ -13,10 +13,15 @@ const nextConfig: NextConfig = {
   ],
   webpack(config) {
     config.resolve = config.resolve || {};
-    config.resolve.modules = [
-      ...(config.resolve.modules || []),
-      path.resolve(__dirname, '../../node_modules'),
-    ];
+    const monorepoNodeModules = path.resolve(__dirname, '../../node_modules');
+    config.resolve.modules = [monorepoNodeModules, ...(config.resolve.modules || [])];
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      '@goalconnect/ui-components': path.resolve(__dirname, '../../packages/ui-components/src/index.ts'),
+      '@goalconnect/utils': path.resolve(__dirname, '../../packages/utils/src/index.ts'),
+      '@goalconnect/feature-x': path.resolve(__dirname, '../../packages/feature-x/src/index.ts'),
+      '@goalconnect/feature-y': path.resolve(__dirname, '../../packages/feature-y/src/index.ts'),
+    };
     return config;
   },
 };

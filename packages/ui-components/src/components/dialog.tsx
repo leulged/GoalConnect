@@ -1,4 +1,13 @@
-import * as React from 'react';
+import {
+  createContext,
+  useContext,
+  cloneElement,
+  type HTMLAttributes,
+  type MouseEvent,
+  type MouseEventHandler,
+  type ReactElement,
+  type ReactNode,
+} from 'react';
 import { createPortal } from 'react-dom';
 import { cn } from '../lib/cn';
 
@@ -7,26 +16,26 @@ type DialogContextValue = {
   setOpen: (v: boolean) => void;
 };
 
-const DialogContext = React.createContext<DialogContextValue | null>(null);
+const DialogContext = createContext<DialogContextValue | null>(null);
 
-export function Dialog({ open, onOpenChange, children }: { open: boolean; onOpenChange: (v: boolean) => void; children: React.ReactNode }) {
+export function Dialog({ open, onOpenChange, children }: { open: boolean; onOpenChange: (v: boolean) => void; children: ReactNode }) {
   return <DialogContext.Provider value={{ open, setOpen: onOpenChange }}>{children}</DialogContext.Provider>;
 }
 
-export function DialogTrigger({ children }: { children: React.ReactElement }) {
-  const ctx = React.useContext(DialogContext);
+export function DialogTrigger({ children }: { children: ReactElement }) {
+  const ctx = useContext(DialogContext);
   if (!ctx) throw new Error('DialogTrigger must be used inside Dialog');
-  const child = children as React.ReactElement<{ onClick?: React.MouseEventHandler }>;
-  return React.cloneElement(child, {
-    onClick: (e: React.MouseEvent) => {
+  const child = children as ReactElement<{ onClick?: MouseEventHandler }>;
+  return cloneElement(child, {
+    onClick: (e: MouseEvent) => {
       child.props.onClick?.(e);
       ctx.setOpen(true);
     },
   });
 }
 
-export function DialogContent({ className, children }: { className?: string; children: React.ReactNode }) {
-  const ctx = React.useContext(DialogContext);
+export function DialogContent({ className, children }: { className?: string; children: ReactNode }) {
+  const ctx = useContext(DialogContext);
   if (!ctx) throw new Error('DialogContent must be used inside Dialog');
   if (!ctx.open) return null;
 
@@ -53,19 +62,19 @@ export function DialogContent({ className, children }: { className?: string; chi
   );
 }
 
-export function DialogHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export function DialogHeader({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return <div className={cn('flex flex-col space-y-1.5 text-center sm:text-left', className)} {...props} />;
 }
 
-export function DialogTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+export function DialogTitle({ className, ...props }: HTMLAttributes<HTMLHeadingElement>) {
   return <h2 className={cn('text-lg font-semibold leading-none tracking-tight', className)} {...props} />;
 }
 
-export function DialogDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+export function DialogDescription({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) {
   return <p className={cn('text-sm text-muted-foreground', className)} {...props} />;
 }
 
-export function DialogFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export function DialogFooter({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return <div className={cn('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', className)} {...props} />;
 }
 
