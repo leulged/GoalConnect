@@ -8,22 +8,18 @@ Course-compliant **component-based monorepo** using npm workspaces.
 - `packages/utils` — shared utilities
 - `packages/feature-x` — feature system 1 (composed React modules)
 - `packages/feature-y` — feature system 2 (composed React modules)
-- `systems/*` — **Next.js apps** per member (assembly only by importing packages)
+- `systems/goalconnect-web` — **Next.js app** that assembles packages (assembly only)
 
 ## Setup
 
 1. `npm install`
 2. `npm run build`
 
-## Run a system (Next.js)
+## Run the web app (Next.js)
 
-Run one system app from the monorepo root:
+From the monorepo root:
 
-- `npm run dev -w member-a`
-- `npm run dev -w member-b`
-- `npm run dev -w member-c`
-- `npm run dev -w member-d`
-- `npm run dev -w member-e`
+- `npm run dev -w goalconnect-web`
 
 ## Build
 

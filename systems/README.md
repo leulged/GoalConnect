@@ -1,8 +1,5 @@
 # Systems
 
-Each member will create their own system assembly folder here, for example:
+The Next.js app for this monorepo is:
 
-- `systems/member-a-system`
-- `systems/member-b-system`
-
-Each system imports composites from `packages/ui-components`, `packages/utils`, `packages/feature-x`, and `packages/feature-y`.
+- `systems/goalconnect-web` — imports and assembles `packages/ui-components`, `packages/utils`, `packages/feature-x`, and `packages/feature-y`.

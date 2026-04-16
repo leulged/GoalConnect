@@ -5,9 +5,9 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background p-8">
       <main className="mx-auto max-w-3xl space-y-6">
-        <h1 className="text-3xl font-bold">Member B system</h1>
+        <h1 className="text-3xl font-bold">GoalConnect</h1>
         <p className="text-muted-foreground">
-          This Next.js system assembles features by importing from workspace packages.
+          Web app that assembles feature packages: players (Feature X) and videos/matches (Feature Y).
         </p>
 
         <div className="grid gap-4 md:grid-cols-2">
@@ -38,4 +38,3 @@ export default function Home() {
     </div>
   );
 }
-
