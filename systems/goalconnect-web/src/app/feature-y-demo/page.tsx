@@ -13,8 +13,10 @@ export default function FeatureYDemoPage() {
       />
       <MatchHistory
         matches={[
-          { id: 'm1', opponent: 'Unity FC', matchDate: Date.now(), result: 'W' },
-          { id: 'm2', opponent: 'Stars Academy', matchDate: Date.now(), result: 'Pending' },
+          { id: 'm1', opponent: 'Unity FC', matchDate: Date.now() - 1000 * 60 * 60 * 24 * 2, result: 'W' },
+          { id: 'm2', opponent: 'Stars Academy', matchDate: Date.now() - 1000 * 60 * 60 * 24 * 1, result: 'Pending' },
+          { id: 'm3', opponent: 'Blue Lions', matchDate: Date.now() - 1000 * 60 * 60 * 24 * 7, result: 'D' },
+          { id: 'm4', opponent: 'Green Wolves', matchDate: Date.now() - 1000 * 60 * 60 * 24 * 10, result: 'L' },
         ]}
       />
     </div>
