@@ -15,9 +15,13 @@ type PositionFilter = 'all' | Player['position'];
 export function PlayerRoster({
   initialPlayers,
   onAdd,
+  selectedPlayerId,
+  onPlayerSelect,
 }: {
   initialPlayers: Player[];
   onAdd?: () => void;
+  selectedPlayerId?: string;
+  onPlayerSelect?: (player: Player) => void;
 }) {
   const [query, setQuery] = React.useState('');
   const [positionFilter, setPositionFilter] = React.useState<PositionFilter>('all');
@@ -107,7 +111,21 @@ export function PlayerRoster({
         />
         <div className="space-y-2">
           {players.map((p) => (
-            <div key={p.id} className="flex items-center justify-between rounded-md border p-3">
+            <div
+              key={p.id}
+              role={onPlayerSelect ? 'button' : undefined}
+              tabIndex={onPlayerSelect ? 0 : -1}
+              className={[
+                'flex items-center justify-between rounded-md border p-3',
+                onPlayerSelect ? 'cursor-pointer select-none hover:bg-muted/50' : '',
+                selectedPlayerId === p.id ? 'border-primary bg-muted' : '',
+              ].join(' ')}
+              onClick={() => onPlayerSelect?.(p)}
+              onKeyDown={(e) => {
+                if (!onPlayerSelect) return;
+                if (e.key === 'Enter' || e.key === ' ') onPlayerSelect(p);
+              }}
+            >
               <div className="font-medium">{p.fullName}</div>
               <Badge variant="outline">{p.position}</Badge>
             </div>
