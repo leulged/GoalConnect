@@ -6,9 +6,9 @@ export default function FeatureYDemoPage() {
       <h1 className="text-2xl font-bold">Feature Y demo</h1>
       <VideoLibrary
         videos={[
-          { id: 'v1', title: 'Highlight reel #1', status: 'analyzed', views: 120 },
-          { id: 'v2', title: 'Training drill', status: 'processing', views: 12 },
-          { id: 'v3', title: 'Upload error sample', status: 'failed', views: 0 },
+          { id: 'v1', title: 'Highlight reel #1', status: 'analyzed', views: 120, createdAt: Date.now() - 1000 * 60 * 60 * 2 },
+          { id: 'v2', title: 'Training drill', status: 'processing', views: 12, createdAt: Date.now() - 1000 * 60 * 30 },
+          { id: 'v3', title: 'Upload error sample', status: 'failed', views: 0, createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3 },
         ]}
       />
       <MatchHistory

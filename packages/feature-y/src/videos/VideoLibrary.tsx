@@ -2,13 +2,14 @@
 
 import * as React from 'react';
 import { Badge, Button, Card, CardContent, CardHeader, CardTitle, Tabs, TabsList, TabsTrigger } from '@goalconnect/ui-components';
-import { clamp } from '@goalconnect/utils';
+import { clamp, formatRelativeTime } from '@goalconnect/utils';
 
 export type VideoItem = {
   id: string;
   title: string;
   status: 'uploaded' | 'processing' | 'analyzed' | 'failed';
   views: number;
+  createdAt: Date | number | string;
 };
 
 export function VideoLibrary({ videos }: { videos: VideoItem[] }) {
@@ -59,7 +60,9 @@ export function VideoLibrary({ videos }: { videos: VideoItem[] }) {
                 <div className="font-medium">{v.title}</div>
                 <Badge variant="outline">{v.status}</Badge>
               </div>
-              <div className="text-sm text-muted-foreground">{clamp(v.views, 0, 9999)} views</div>
+              <div className="text-sm text-muted-foreground">
+                {clamp(v.views, 0, 9999)} views • {formatRelativeTime(v.createdAt)}
+              </div>
               <Button size="sm" variant="secondary">
                 Open
               </Button>

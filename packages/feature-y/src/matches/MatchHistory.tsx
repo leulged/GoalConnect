@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Badge, Card, CardContent, CardHeader, CardTitle, Tabs, TabsList, TabsTrigger } from '@goalconnect/ui-components';
-import { formatDate } from '@goalconnect/utils';
+import { formatDate, formatRelativeTime } from '@goalconnect/utils';
 
 export type MatchItem = {
   id: string;
@@ -68,7 +68,9 @@ export function MatchHistory({ matches }: { matches: MatchItem[] }) {
           <div key={m.id} className="flex items-center justify-between rounded-md border p-3">
             <div>
               <div className="font-medium">{m.opponent}</div>
-              <div className="text-sm text-muted-foreground">{formatDate(m.matchDate)}</div>
+              <div className="text-sm text-muted-foreground">
+                {formatDate(m.matchDate)} • {formatRelativeTime(m.matchDate)}
+              </div>
             </div>
             <Badge variant={badgeVariantForResult(m.result)}>{m.result}</Badge>
           </div>

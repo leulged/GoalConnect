@@ -4,6 +4,32 @@ export function formatDate(input: Date | number | string): string {
   return d.toISOString().slice(0, 10);
 }
 
+export function formatRelativeTime(
+  input: Date | number | string,
+  now: Date | number = Date.now()
+): string {
+  const date = new Date(input);
+  const nowDate = new Date(now);
+  if (Number.isNaN(date.getTime()) || Number.isNaN(nowDate.getTime())) return '';
+
+  const diffMs = nowDate.getTime() - date.getTime();
+  const diffSec = Math.round(diffMs / 1000);
+
+  if (diffSec < 0) return formatDate(input);
+  if (diffSec < 60) return 'just now';
+
+  const diffMin = Math.floor(diffSec / 60);
+  if (diffMin < 60) return `${diffMin}m ago`;
+
+  const diffHr = Math.floor(diffMin / 60);
+  if (diffHr < 24) return `${diffHr}h ago`;
+
+  const diffDay = Math.floor(diffHr / 24);
+  if (diffDay < 7) return `${diffDay}d ago`;
+
+  return formatDate(input);
+}
+
 export function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
 }
