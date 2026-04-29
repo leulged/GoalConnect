@@ -8,6 +8,7 @@ export default function FeatureYDemoPage() {
         videos={[
           { id: 'v1', title: 'Highlight reel #1', status: 'analyzed', views: 120 },
           { id: 'v2', title: 'Training drill', status: 'processing', views: 12 },
+          { id: 'v3', title: 'Upload error sample', status: 'failed', views: 0 },
         ]}
       />
       <MatchHistory
