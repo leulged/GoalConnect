@@ -1,7 +1,17 @@
 'use client';
 
 import * as React from 'react';
-import { Badge, Card, CardContent, CardHeader, CardTitle, Tabs, TabsList, TabsTrigger } from '@goalconnect/ui-components';
+import {
+  Badge,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  EmptyState,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+} from '@goalconnect/ui-components';
 import { formatDate, formatRelativeTime } from '@goalconnect/utils';
 
 export type MatchItem = {
@@ -75,7 +85,9 @@ export function MatchHistory({ matches }: { matches: MatchItem[] }) {
             <Badge variant={badgeVariantForResult(m.result)}>{m.result}</Badge>
           </div>
         ))}
-        {visibleMatches.length === 0 && <div className="text-sm text-muted-foreground">No matches found.</div>}
+        {visibleMatches.length === 0 && (
+          <EmptyState title="No matches found" description="Try another result filter or sort option." />
+        )}
       </CardContent>
     </Card>
   );

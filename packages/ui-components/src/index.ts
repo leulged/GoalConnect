@@ -10,3 +10,4 @@ export * from './components/badge';
 export * from './components/dialog';
 export * from './components/table';
 export * from './components/tabs';
+export * from './components/empty-state';

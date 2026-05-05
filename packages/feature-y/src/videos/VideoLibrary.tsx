@@ -14,6 +14,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  EmptyState,
   Tabs,
   TabsList,
   TabsTrigger,
@@ -93,7 +94,9 @@ export function VideoLibrary({ videos }: { videos: VideoItem[] }) {
               </Button>
             </div>
           ))}
-          {visibleVideos.length === 0 && <div className="text-sm text-muted-foreground">No videos found.</div>}
+          {visibleVideos.length === 0 && (
+            <EmptyState title="No videos found" description="Try a different status filter or sort option." />
+          )}
         </div>
       </CardContent>
 
