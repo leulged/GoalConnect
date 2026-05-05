@@ -1,7 +1,23 @@
 'use client';
 
 import * as React from 'react';
-import { Badge, Button, Card, CardContent, CardHeader, CardTitle, Tabs, TabsList, TabsTrigger } from '@goalconnect/ui-components';
+import {
+  Badge,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+} from '@goalconnect/ui-components';
 import { clamp, formatRelativeTime } from '@goalconnect/utils';
 
 export type VideoItem = {
@@ -15,6 +31,8 @@ export type VideoItem = {
 export function VideoLibrary({ videos }: { videos: VideoItem[] }) {
   const [statusFilter, setStatusFilter] = React.useState<'all' | VideoItem['status']>('all');
   const [sortBy, setSortBy] = React.useState<'views_desc' | 'title_asc'>('views_desc');
+  const [open, setOpen] = React.useState(false);
+  const [selectedVideo, setSelectedVideo] = React.useState<VideoItem | null>(null);
 
   const visibleVideos = React.useMemo(() => {
     const filtered = statusFilter === 'all' ? videos : videos.filter((v) => v.status === statusFilter);
@@ -63,7 +81,14 @@ export function VideoLibrary({ videos }: { videos: VideoItem[] }) {
               <div className="text-sm text-muted-foreground">
                 {clamp(v.views, 0, 9999)} views • {formatRelativeTime(v.createdAt)}
               </div>
-              <Button size="sm" variant="secondary">
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={() => {
+                  setSelectedVideo(v);
+                  setOpen(true);
+                }}
+              >
                 Open
               </Button>
             </div>
@@ -71,6 +96,38 @@ export function VideoLibrary({ videos }: { videos: VideoItem[] }) {
           {visibleVideos.length === 0 && <div className="text-sm text-muted-foreground">No videos found.</div>}
         </div>
       </CardContent>
+
+      <Dialog
+        open={open}
+        onOpenChange={(v) => {
+          setOpen(v);
+          if (!v) setSelectedVideo(null);
+        }}
+      >
+        <DialogContent>
+          {selectedVideo && (
+            <>
+              <DialogHeader>
+                <DialogTitle>{selectedVideo.title}</DialogTitle>
+                <DialogDescription>
+                  {clamp(selectedVideo.views, 0, 9999)} views • {formatRelativeTime(selectedVideo.createdAt)}
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="flex items-center justify-between rounded-md border p-3">
+                <div className="text-sm font-medium">Status</div>
+                <Badge variant="outline">{selectedVideo.status}</Badge>
+              </div>
+
+              <DialogFooter className="mt-4">
+                <Button variant="outline" onClick={() => setOpen(false)}>
+                  Close
+                </Button>
+              </DialogFooter>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </Card>
   );
 }
